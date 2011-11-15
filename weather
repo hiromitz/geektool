@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+$url = "http://weather.yahooapis.com/forecastrss?p=JAXX0085&u=c";
+
+$rss = @simplexml_load_file($url);
+$condition = $rss->xpath('/rss/channel/item/yweather:condition');
+
+$array = array();
+foreach( $condition[0]->attributes() as $key=>$val) {
+$array[$key] = $val;
+}
+
+echo $array['text'];
+echo ', ';
+echo $array['temp'];
+echo ' C';
